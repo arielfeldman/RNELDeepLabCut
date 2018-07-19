@@ -43,7 +43,7 @@ Please also install:
 Run the GUI from the Ubuntu terminal and set the global variables for your dataset. The variables that must be configured differ based on the mode the GUI is being run in (Generating, Training or Analysis), and thus will be detailed in those sections of this guide. Below is an example of how RNEL's DeepLabCut interface should appear.
 
 <p align="center">
-<img src="/gui.png" width="60%">
+<img src="/gui_RNELlabel.png" width="60%">
 </p>
 
 - Scorer specifies the name of whomever has labeled the data to be used in training. This is helpful to specify networks after multiple have been stored. The same scorer must be specified when referencing an earlier network as was used when creating the network.
