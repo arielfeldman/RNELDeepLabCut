@@ -19,6 +19,7 @@ class Ui_MainWindow(object):
         for attr in self.__attributes__:
                 exec("self." + attr + " = None")
         self._mode = "Generating"
+        self._root_path = os.getcwd()
 
     def setupUi(self, MainWindow):
         
@@ -269,21 +270,30 @@ class Ui_MainWindow(object):
 
             if self._mode == "Generating":
                 os.system("python Step1_SelectRandomFrames_fromVideos.py")
+                os.chdir(self._root_path)
+                print("Dataset has been generated; Label away!")
 
             elif self._mode == "Training":
+                print("Initiating Training...")
+                print("Converting Labels to Pandas DataFrame")
                 os.system("python Step2_ConvertingLabels2DataFrame.py")
+                print("Checking the Labelled Data")
                 os.system("python Step3_CheckLabels.py")
+                print("Generating the Training Directories from the Dataset")
                 os.system("python Step4_GenerateTrainingFileFromLabelledData.py")
                 os.system("cp -R "+ str(self._task)+ str(self._date)+"-trainset95shuffle1 ../pose-tensorflow/models/")
                 os.system("cp -R UnaugmentedDataSet_"+ str(self._task) + str(self._date)+"/ ../pose-tensorflow/models/")
                 os.chdir("../pose-tensorflow/models/pretrained/")
                 os.system("./download.sh")
                 os.chdir("../"+str(self._task) + str(self._date)+"-trainset95shuffle1/train")
+                print("Training starts now...")
                 os.system("TF_CUDNN_USE_AUTOTUNE=0 CUDA_VISIBLE_DEVICES=0 python ../../../train.py")
+                os.chdir(self._root_path)
+                print("Training has been completed; Go ahead and analyze!")
 
         elif self._mode == "Analysis":
             
-            print("entered analysis")
+            print("Commence Analysis...")
             a_folder = ""
             
             self._vidtype = str(self.gvid_type.text())
