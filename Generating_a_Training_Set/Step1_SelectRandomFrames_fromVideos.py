@@ -49,7 +49,8 @@ auxiliaryfunctions.attempttomakefolder(basefolder)
 # Number of frames to pick (set this to 0 until you found right cropping)
 numframes2pick = trainingsiterations
 
-clip = VideoFileClip(vidpath + '/' + filename)
+# clip = VideoFileClip(vidpath + '/' + filename)
+clip = VideoFileClip(filename)
 print("Duration of video [s], ", clip.duration, "fps, ", clip.fps,
       "Cropped frame dimensions: ", clip.size)
 
@@ -81,7 +82,7 @@ print("--> Adjust shiftx, shifty, fx and fy accordingly! <---")
 ####################################################
 
 print("Videoname: ", filename)
-folder = filename.split('.')[0]
+folder = str(filename.split('/')[-1]).split('.')[0]
 auxiliaryfunctions.attempttomakefolder(basefolder + folder)
 
 frames = np.random.randint(
@@ -98,7 +99,8 @@ for index in frames:
         print("Frame # ", index, " does not exist.")
 
 # Extract the first frame (not cropped!) - useful for data augmentation
-clip = VideoFileClip(vidpath + '/' + filename)
+# clip = VideoFileClip(vidpath + '/' + filename)
+clip = VideoFileClip(filename)
 index = 0
 image = img_as_ubyte(clip.get_frame(index * 1. / clip.fps))
 io.imsave(basefolder + folder + "/img" + str(index).zfill(width) + ".png",

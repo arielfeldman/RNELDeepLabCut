@@ -259,7 +259,7 @@ class Ui_MainWindow(object):
 
             instr[18] = "filename = '" + str(self._trainingvid) + "'\n"
 
-            instr[77] = "trainingsiterations = '" + str(self._trainingsiters) + "'\n"
+            instr[77] = "trainingsiterations = " + str(self._trainingsiters) + "\n"
             
             with open('myconfig.py', 'w') as f:
                 f.writelines(instr)
@@ -367,7 +367,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Kemere DeepLabCut"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "RNEL's DeepLabCut"))
         self.label_8.setText(_translate("MainWindow", "Note: Scorer, Label Date and Task Name must match the inputs written prior to training of the network!"))
         self.label_3.setText(_translate("MainWindow", "Scorer:"))
         self.label_4.setText(_translate("MainWindow", "Label Date:"))
