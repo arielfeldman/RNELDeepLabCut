@@ -11,18 +11,38 @@ import sys
 import os
 
 class Ui_MainWindow(object):
+    """
+    Create a User Interface to simplify use of DeepLabCut for those with less of a
+    computational background.
+    """
+    
+    # Specify the attributes for an instance of the Ui_MainWindow class; the user 
+    # configurable variables
     __attributes__ = ['_scorername', '_date', '_task', '_vidtype', '_bodyparts',\
                         '_cropping', '_dataset', '_trainingvid', '_analysisvid',\
                         '_mode']
 
     def __init__(self):
+        """
+        Initializing all the attributes of the Ui_MainWindow instance, and
+        setting the mode to Generating (the default mode, unless user selects
+        otherwise).
+        """
+        
+        # Iterate through the attributes and set them to None
         for attr in self.__attributes__:
                 exec("self." + attr + " = None")
+        
+        # Set default mode and obtain the directory path the GUI is stored in
         self._mode = "Generating"
         self._root_path = os.getcwd()
 
     def setupUi(self, MainWindow):
-        
+        """
+        Setting up the display on the User's end
+        """
+
+        # Setting up the Main Window
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(846, 429)
         
@@ -53,6 +73,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         
+        # Setting up the default scorer name specification
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem4)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
@@ -65,6 +86,7 @@ class Ui_MainWindow(object):
         self.gscorer.setObjectName("gscorer")
         self.verticalLayout_2.addWidget(self.gscorer)
         
+        # Setting up the default date specification
         spacerItem5 = QtWidgets.QSpacerItem(20, 30, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_2.addItem(spacerItem5)
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
@@ -75,6 +97,7 @@ class Ui_MainWindow(object):
         self.gdate.setObjectName("gdate")
         self.verticalLayout_2.addWidget(self.gdate)
         
+        # Setting up the default task specification
         spacerItem6 = QtWidgets.QSpacerItem(20, 30, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_2.addItem(spacerItem6)
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
@@ -85,6 +108,7 @@ class Ui_MainWindow(object):
         self.gtask.setObjectName("gtask")
         self.verticalLayout_2.addWidget(self.gtask)
         
+        # Setting up the default video type to analyze
         spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_2.addItem(spacerItem7)
         self.label_10 = QtWidgets.QLabel(self.centralwidget)
@@ -96,6 +120,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.gvid_type)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         
+        # Setting up the default body parts to track
         spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem8)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
@@ -108,6 +133,7 @@ class Ui_MainWindow(object):
         self.gbodyparts.setObjectName("gbodyparts")
         self.verticalLayout_3.addWidget(self.gbodyparts)
         
+        # Setting up the default cropping specifications
         spacerItem9 = QtWidgets.QSpacerItem(20, 30, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_3.addItem(spacerItem9)
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
@@ -118,6 +144,7 @@ class Ui_MainWindow(object):
         self.gcrop.setObjectName("gcrop")
         self.verticalLayout_3.addWidget(self.gcrop)
         
+        # Setting up the dataset file selection
         spacerItem10 = QtWidgets.QSpacerItem(20, 30, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_3.addItem(spacerItem10)
         self.label_9 = QtWidgets.QLabel(self.centralwidget)
@@ -127,6 +154,7 @@ class Ui_MainWindow(object):
         self.gdataset.setObjectName("gdataset")
         self.verticalLayout_3.addWidget(self.gdataset)
         
+        # Setting up the training video file selection
         spacerItem11 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_3.addItem(spacerItem11)
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
@@ -137,6 +165,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.gtrain_vid_file)
         self.horizontalLayout.addLayout(self.verticalLayout_3)
         
+        # Setting up the Analysis Video File selection 
         spacerItem12 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem12)
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -148,6 +177,7 @@ class Ui_MainWindow(object):
         self.ganalysis_vid_file.setObjectName("ganalysis_vid_file")
         self.verticalLayout.addWidget(self.ganalysis_vid_file)
         
+        # Setting up the default training iterations specification
         spacerItem13 = QtWidgets.QSpacerItem(20, 30, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem13)
         self.label_12 = QtWidgets.QLabel(self.centralwidget)
@@ -158,6 +188,7 @@ class Ui_MainWindow(object):
         self.gtraining_iter.setText("5000")
         self.verticalLayout.addWidget(self.gtraining_iter)
         
+        # Setting up the Combo Box to select mode
         spacerItem14 = QtWidgets.QSpacerItem(20, 30, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem14)
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -170,6 +201,7 @@ class Ui_MainWindow(object):
         self.gmode_select.addItem("")
         self.verticalLayout.addWidget(self.gmode_select)
         
+        # Setting up the run button
         spacerItem15 = QtWidgets.QSpacerItem(20, 60, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem15)
         self.gleggo = QtWidgets.QPushButton(self.centralwidget)
@@ -182,6 +214,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addLayout(self.horizontalLayout)
         self.formLayout.setLayout(2, QtWidgets.QFormLayout.LabelRole, self.verticalLayout_4)
         
+        # Connect to slots, so clicking on file selectors will open file navigators,
+        # and clicking "Let's Go!" will write to the myconfig file
         self.connect4()
         self.gleggo.clicked.connect(self.run)
 
@@ -191,6 +225,10 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def connect4(self):
+        """
+        Connect to individual slots for each of the file selectors, and the mode combo
+        box
+        """
 
         self.gdataset.clicked.connect(self.datasetSlot)
         self.gtrain_vid_file.clicked.connect(self.trainingVidSlot)
@@ -202,11 +240,12 @@ class Ui_MainWindow(object):
         Upon hitting "Let's Go!", the user configurations are passed to the configuration
         file, and the selected mode is run.
         """
-        # print(self._mode)
         
-        # Setting the attributes of the session in the MainWindow() class
+        # Checking if Generating, Training or Analysis mode has been selected
         if (self._mode == "Training") or (self._mode == "Generating"):
             
+            # Setting the attributes of the session in the MainWindow() class that
+            # are shared between Training and Generating
             self._scorername = str(self.gscorer.text())
             print("Scorer:",self._scorername)
 
@@ -219,11 +258,12 @@ class Ui_MainWindow(object):
             self._bodyparts = str(self.gbodyparts.text())
             print("Items to Track:", self._bodyparts)
 
+            # Assume no cropping if the user does not alter cropping text
             self._cropping = str(self.gcrop.text())
             if self._cropping == "0, 0, 0, 0":
                 print("No cropping")
             else:
-                print("Cropping Coordinates:", self._cropping)
+                print("Cropping at Coordinates:", self._cropping)
             
             self._trainingsiters = str(self.gtraining_iter.text())
             print("Save Iterations:", self._trainingsiters)
@@ -233,7 +273,7 @@ class Ui_MainWindow(object):
             
             print("Training Video File:", str(self._trainingvid))
 
-            # Rewriting the lines in the training configuration file in place
+            # Rewriting the lines in the training configuration file, in place
             with open('myconfig.py', 'r') as f:
                 instr = f.readlines()
             
@@ -246,10 +286,14 @@ class Ui_MainWindow(object):
 
             instr[39] = "bodyparts = [" + str(self._bodyparts) + "]\n"
 
+            # Set cropping variable to False, if user did not alter cropping 
+            # coordinates. Otherwise, set x1, x2, y1, and y2.
             if self._cropping == "0, 0, 0, 0":
                 instr[20] = "cropping = False"+ "\n"
+            
             else:
                 instr[20] = "cropping = True"+"\n"
+            
             instr[26] = "x1 = " + self._cropping.split(",")[0] +"\n"
             instr[27] = "x2 = " + self._cropping.split(",")[2] +"\n"
             instr[28] = "y1 = " + self._cropping.split(",")[1] +"\n"
@@ -262,40 +306,63 @@ class Ui_MainWindow(object):
 
             instr[77] = "trainingsiterations = " + str(self._trainingsiters) + "\n"
             
+            # write the user's configurations to the myconfig file
             with open('myconfig.py', 'w') as f:
                 f.writelines(instr)
             print("User configurations set!")
 
+            # Enter the directory for making a dataset and training
             os.chdir("Generating_a_Training_Set")
 
+            # To generate a training set, run the script to randomly and uniformly 
+            # select frames from across the training video
             if self._mode == "Generating":
                 os.system("python Step1_SelectRandomFrames_fromVideos.py")
                 os.chdir(self._root_path)
                 print("Dataset has been generated; Label away!")
 
+            # Train on the specified dataset, if in Training mode
             elif self._mode == "Training":
+                
                 print("Initiating Training...")
+                
+                # Convert the labels specified in the dataset .csv file to a pandas
+                # dataframe
                 print("Converting Labels to Pandas DataFrame")
                 os.system("python Step2_ConvertingLabels2DataFrame.py")
+                
+                # Generate the labels in the dataset .csv on the images, so that the
+                # user can check if they are accurate
                 print("Checking the Labelled Data")
                 os.system("python Step3_CheckLabels.py")
+                
+                # Generate the files used in training from the dataset, and move them
+                # to the proper location
                 print("Generating the Training Directories from the Dataset")
                 os.system("python Step4_GenerateTrainingFileFromLabelledData.py")
                 os.system("cp -R "+ str(self._task)+ str(self._date)+"-trainset95shuffle1 ../pose-tensorflow/models/")
                 os.system("cp -R UnaugmentedDataSet_"+ str(self._task) + str(self._date)+"/ ../pose-tensorflow/models/")
                 os.chdir("../pose-tensorflow/models/pretrained/")
+                
+                # Download pretrained weights for the resnets
                 os.system("./download.sh")
                 os.chdir("../"+str(self._task) + str(self._date)+"-trainset95shuffle1/train")
+                
+                # Begin training on GPU 0
                 print("Training starts now...")
                 os.system("TF_CUDNN_USE_AUTOTUNE=0 CUDA_VISIBLE_DEVICES=0 python ../../../train.py")
                 os.chdir(self._root_path)
+                
                 print("Training has been completed; Go ahead and analyze!")
 
         elif self._mode == "Analysis":
             
             print("Commence Analysis...")
+            
+            # Initialize an empty string to represent the folder of videos to analyze
             a_folder = ""
             
+            # Set the user configurations specified in the GUI for Analysis
             self._vidtype = str(self.gvid_type.text())
             print("Type of Videos to Analyze:", self._vidtype)
 
@@ -319,11 +386,13 @@ class Ui_MainWindow(object):
             self._trainingsiters = str(self.gtraining_iter.text())
             print("Save Iterations:", self._trainingsiters)
             
+            # Having selected any file in the video analysis folder, determine
+            # the folder location (get rid of filename)
             for directory in self._analysisvid.split("/")[0:-1]:
                 a_folder += str(directory)+"/"
             print("Analysis Video Folder:", str(a_folder))
 
-            # Rewriting the lines in the analysis configuration file in place
+            # Rewriting the lines in the analysis configuration file, in place
             with open('myconfig_analysis.py', 'r') as f:
                 instr = f.readlines()
             
@@ -337,6 +406,8 @@ class Ui_MainWindow(object):
 
             instr[32] = "date = '" + str(self._date) + "'\n"
 
+            # Set cropping variable to False, if user did not alter cropping 
+            # coordinates. Otherwise, set x1, x2, y1, and y2.
             if self._cropping == "0, 0, 0, 0":
                 instr[9] = "cropping = False"+ "\n"
             else:
@@ -348,34 +419,59 @@ class Ui_MainWindow(object):
 
             instr[43] = "trainingsiterations = '" + str(self._trainingsiters) + "'\n"
             
+            # write user configurations to myconfig_analysis file
             with open('myconfig_analysis.py', 'w') as f:
                 f.writelines(instr)
             print("User configurations set!")
 
             os.chdir("Evaluation-Tools/")
-            print(os.getcwd())
-            os.system("python Step1_EvaluateModelonDataset.py")
+            
+            # Evaluate how well the network generalizes to the dataset
+            os.system("CUDA_VISIBLE_DEVICES=0 python Step1_EvaluateModelonDataset.py")
+            
+            # Determine accuracy of the network on test and train sets
             os.system("python Step2_AnalysisofResults.py")
+
+            # Extract pose data from the videos being analyzed
             os.system("CUDA_VISIBLE_DEVICES=0 python AnalyzeVideos.py")
+
+            # Draw the predicted poses on the video
             os.system("python MakingLabeledVideo.py")            
 
     def datasetSlot(self):
+        """
+        User selection of dataset .csv file for training
+        """
 
         self._dataset = QtWidgets.QFileDialog.getOpenFileName()[0]
 
     def trainingVidSlot(self):
+        """
+        User selection of a video for frame selection to generate a dataset
+        """
 
         self._trainingvid = QtWidgets.QFileDialog.getOpenFileName()[0]
 
     def analysisVidSlot(self):
+        """
+        User selection of a folder containing all the videos they would like to 
+        analyze
+        """
         
         self._analysisvid = QtWidgets.QFileDialog.getOpenFileName()[0]
 
     def modeSlot(self):
+        """
+        User selection of mode of DeepLabCut to run
+        """
 
         self._mode = str(self.gmode_select.currentText())
 
     def retranslateUi(self, MainWindow):
+        """
+        Formatting the user interface labels and icon
+        """
+
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "RNEL's DeepLabCut"))
         self.label_8.setText(_translate("MainWindow", "Note: Scorer, Label Date and Task Name must match the inputs written prior to training of the network!"))
@@ -405,4 +501,3 @@ ui = Ui_MainWindow()
 ui.setupUi(MainWindow)    
 MainWindow.show()
 sys.exit(app.exec_())
-
